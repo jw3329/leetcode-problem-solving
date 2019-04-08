@@ -1,0 +1,55 @@
+
+
+
+
+
+
+
+	7 -> 8 ->
+
+	check mid, if it is less than target, check next element
+
+	if next element is less than target, search it starting from left
+
+	if next element is equal to target, left value is the value itself
+
+	if it is larger than target, then return [-1,-1]
+
+	if mid is larger than target, check the previous element
+
+	if previous element is less than target, then it means that there's no value, so return [former, former]
+
+	if previous element is greater than target, then binary search where high = mid - 1
+
+	if previous element is equal to target, return [former, latter]
+
+	if mid value is equal to target, 
+
+
+
+	get first one, get second one
+
+	get first one,
+	
+	if cur is not target, and cur + 1 is the target, then return cur + 1
+	if low > high: return -1
+	if cur is target:
+		high = mid - 1
+		call function
+	if cur is not target:
+		if cur + 1 is the target, then return cur + 1
+		else:
+			if cur + 1 > target then return -1
+			else: low = mid + 1 then call function
+
+	get second one,
+
+	if low > high: return -1
+	if cur is target then
+		low = mid + 1
+		call function
+	else:
+		if cur - 1 is the target ,then return cur - 1
+		else:
+			if cur - 1 < target, then return -1
+			else: high = mid - 1 then call function
