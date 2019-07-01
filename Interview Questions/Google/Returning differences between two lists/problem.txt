@@ -1,0 +1,8 @@
+Given two lists, return the elements of the first list that are not in the second list. And also return the elements on the second list that are not in the first list.
+For example if you have the lists:
+
+l = [1, 2, 2, 4]
+l2 = [1, 2]
+// Result
+l = [2, 4] // In this case 1, 2 are on the second list
+l2 = []
