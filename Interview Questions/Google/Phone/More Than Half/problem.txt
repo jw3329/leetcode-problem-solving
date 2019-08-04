@@ -1,0 +1,19 @@
+Given an int array logof length n. Implement the following method
+
+public class Solution {
+
+	public Solution(int[] log){
+	}
+
+	/**
+	*  Returns true if the "logType" appears more than half times in the interval [start, end], otherwise false.
+	*/
+	public boolean isMoreThanHalf(int start, int end, int logType) {
+	}
+}
+Example:
+
+Solution s = new Solution([6, 6, 6, 7, 3, 8]);
+s.isMoreThanHalf(0, 3, 6); // true 
+s.isMoreThanHalf(1, 4, 6); // false
+s.isMoreThanHalf(2, 5, 7); // false
