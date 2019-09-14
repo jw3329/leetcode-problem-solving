@@ -1,0 +1,6 @@
+Implement a method that sort words, but instead of using the normal alphabet a, b, c, ..., x, y, z, we have ch that goes between h and i in the sort order. So the alphabet becomes a, b, ... h, ch, i, ... x, y, z.
+
+Example 1:
+
+Inout: ["indigo", "charisma", "hotel"]
+Output: ["hotel", "charisma", "indigo"]
