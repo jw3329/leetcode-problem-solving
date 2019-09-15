@@ -5,14 +5,18 @@ class TinyURL:
     def __init__(self):
         self.count = 0
         self.id_map = {}
+        self.long_id_map = {}
 
     def insert_long_url(self,long_url):
+        # check if long url is in the database
+        if long_url in self.long_id_map: return self.long_id_map[long_url]
         self.count += 1
         self.id_map[self.count] = {
             'short_url': self.id_to_short_url(self.count),
             'long_url': long_url
         }
-        return True
+        self.long_id_map[long_url] = self.count
+        return self.count
 
     def id_to_short_url(self,id):
         short_url = ''
@@ -51,9 +55,10 @@ def generate_urls(num):
 
 s = TinyURL()
 
-urls = generate_urls(10000)
+urls = generate_urls(100)
 
 for url in urls:
     s.insert_long_url(url)
 
 print(s.id_map)
+print(s.long_id_map)
