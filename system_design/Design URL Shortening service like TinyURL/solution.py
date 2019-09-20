@@ -1,5 +1,5 @@
 class TinyURL:
-    
+
     char_map = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
     def __init__(self):
@@ -7,7 +7,7 @@ class TinyURL:
         self.id_map = {}
         self.long_id_map = {}
 
-    def insert_long_url(self,long_url):
+    def insert_long_url(self, long_url):
         # check if long url is in the database
         if long_url in self.long_id_map: return self.long_id_map[long_url]
         self.count += 1
@@ -18,14 +18,14 @@ class TinyURL:
         self.long_id_map[long_url] = self.count
         return self.count
 
-    def id_to_short_url(self,id):
+    def id_to_short_url(self, id):
         short_url = ''
         while id:
             short_url += self.char_map[id % 62]
             id //= 62
         return short_url[::-1]
 
-    def short_url_to_id(self,short_url):
+    def short_url_to_id(self, short_url):
         id = 0
         for c in short_url:
             sub_val, add_val = 0, 0
@@ -39,7 +39,8 @@ class TinyURL:
                 sub_val = ord('0')
                 add_val = 52
             id = id * 62 + ord(c) - sub_val + add_val
-        return id 
+        return id
+
 
 def generate_urls(num):
     res = []
@@ -48,10 +49,11 @@ def generate_urls(num):
     for i in range(num):
         url = ''
         for j in range(10):
-            index = random.randint(0,25)
+            index = random.randint(0, 25)
             url += char_list[index]
         res.append(url)
     return res
+
 
 s = TinyURL()
 
