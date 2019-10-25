@@ -1,0 +1,11 @@
+Given a Node in the Tree (not the root & not the tree) find its first right neighbor. You cannot use extra space.
+Never saw this problem. Input as below if query is 3, return 4.
+
+	  0
+    /   \
+   1     2
+  /       \
+ 3         4
+I mentioned Level order as brute force interviewer asked to not use Level Order. I could think of having a parent pointer in each node & as we will be given the query node, we travel upwards with a depth variable which we keep increasing on going to the parent, when we find such parent who has a right child we attempt to find the right neighbor in this subtree, for doing this we pass in the depth variable & decrement it, if we are able to reach the same level (0) then we have arrived at the result node, this approach worked fine, there was some fine tunining required when we ran couple of examples. A very interactive session & I finally coded it in the chrome book & interviewer was satisfied.
+
+Follow-up: As we had time, he added complexity to this problem, now every node has a maxDepth state with it, which is max of maxDepth of Left Child / rightChild + 1. How will you use this information now to our advantage. With maxDepth knowledge it became easier to prune the search & skip searching the subtree by just looking at the root of the subTree, coded it again, interviewer was very happy (at least i felt it). I think I did well in this round. but lets carry on to round 3 after lunch.
