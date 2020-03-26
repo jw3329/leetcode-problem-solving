@@ -1,0 +1,14 @@
+The final step before gets the potential offer from Facebook. Due to CoronaVirus, it changes from On-Site Interview to Video On-Site Interview. 3 rounds of 1:1 Bluejean 45 minutes interviews. First and last round are coding interviews each has 2 questions. And the other is a BQ interview.
+
+Interview Questions
+
+Is Completed Binary Tree  
+1 Answer
+Almost Palindrome (Palindrome with white space)  
+Answer Question
+Behavior Questions:  
+1 Answer
+Add two positive integer number in string Format  
+Answer Question
+Add two positive decimal number in string Format  
+1 Answer
