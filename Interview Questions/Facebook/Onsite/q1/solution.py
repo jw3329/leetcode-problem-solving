@@ -10,8 +10,10 @@
 # if k is equal to pivot, then we found -> return
 # if k is larger than pivot -> right side search
 
+
 def swap(arr, i, j):
     arr[i], arr[j] = arr[j], arr[i]
+
 
 def partition(arr, left, right):
     pivot = arr[right]
@@ -32,11 +34,12 @@ def find_kth_smallest(arr, k):
     while left <= right:
         # find pivot
         index = partition(arr, left, right)
-        if k == index + left: return arr[index]
-        if k < index + left: 
+        if k == index:
+            return arr[index]
+        if k < index:
             right = index - 1
         else:
-            left = index + 1
+            left = 1
     return -1
 
 
@@ -49,11 +52,11 @@ def find_kth_largest(arr, k):
 
 
 # arr = [1,5,3,4,2] pivot -> 2
-#.         i.    right
+# .         i.    right
 # arr = [1,5,3,4,2] swap 5,2 to make bottom arr
 
 # arr = [1,2,3,4,5] -> index = 1
-#.         1.  3
+# .         1.  3
 
 # left -> 2
 # right -> 4
@@ -82,10 +85,11 @@ def find_kth_largest(arr, k):
 # left -> 0
 # right -> 4
 
+arr = [1, 5, 3, 4, 2]
+k = 2
 
 
-find_kth_largest(arr, k)
-
+print(find_kth_largest(arr, k))
 
 
 # iterate string
@@ -104,23 +108,26 @@ find_kth_largest(arr, k)
 
 def operate_stack_insert(stack, sofar, multi):
     if multi:
-        if not stack: raise Exception('stack is empty')
+        if not stack:
+            raise Exception("stack is empty")
         popped = stack.pop()
         # so far multiple
         stack.append(popped * sofar)
     else:
         stack.append(sofar)
 
+
 def solve(string):
     sofar = 0
     multi = False
+    stack = []
     for c in string:
-        if '0' <= c <= '9':
+        if "0" <= c <= "9":
             # update so far value
             sofar = 10 * sofar + int(c)
-        elif c == '*':
+        elif c == "*":
             # put into stack so far value
-            stack.append(sofar)
+            operate_stack_insert(stack, sofar, multi)
             sofar = 0
             multi = True
         else:
@@ -131,8 +138,11 @@ def solve(string):
             multi = False
     if sofar:
         operate_stack_insert(stack, sofar, multi)
+    print(stack)
     return sum(stack)
 
 
-
-solve('2*3+4')
+print(solve("2*3+4"))
+print(solve("2+3*4"))
+print(solve("2+3+4"))
+print(solve("2*3*4"))
