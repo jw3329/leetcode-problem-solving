@@ -1,3 +1,10 @@
 Return the total sum of all leaf nodes in a n-ary tree in O(1) Space. You cannot use recursion as the call stack uses memory. You can construct the node class as you choose.
 
 You cannot use any extra space, the solution has to be in O(1) space
+
+# leaf is node with no child
+# summing those only
+# if i can find next level, keep next level node, and then link all same level node with next or prev
+# check availability of next level, if available, then choose that
+# keep doing that and track the sum
+# return som
