@@ -1,7 +1,4 @@
-'''Write a program which prints out all numbers between 1 and 100. When the program would print out a number exactly divisible by 4, print "Linked" instead. When it would print out a number exactly divisible by 6, print "In" instead. When it would print out a number exactly divisible by both 4 and 6, print "LinkedIn" instead.'''
-
-
-
+"""Write a program which prints out all numbers between 1 and 100. When the program would print out a number exactly divisible by 4, print "Linked" instead. When it would print out a number exactly divisible by 6, print "In" instead. When it would print out a number exactly divisible by both 4 and 6, print "LinkedIn" instead."""
 
 # for i in range(1, 101):
 #     if i % 4 == 0 and i % 6 == 0:
@@ -27,8 +24,7 @@
 # LinkedIn
 
 
-
-'''Assume there is a REST API available at "http://www.linkedin.corp/api" for accessing employee information. The employee information endpoint is "/employee/<id>". Each employee record you retrieve will be a JSON object with the following keys:
+"""Assume there is a REST API available at "http://www.linkedin.corp/api" for accessing employee information. The employee information endpoint is "/employee/<id>". Each employee record you retrieve will be a JSON object with the following keys:
 
   - 'name'  refers to a String that contains the employee's first and last name
 
@@ -64,23 +60,23 @@ Flynn Mackie - Senior VP of Engineering
 
 -----------End Sample Output--------------
 
-'''
+"""
 
 # employees = dict(
-#     A123456789 = dict (
-#         name = "Flynn Mackie",
-#         title = "Senior VP of Engineering",
-#         reports = ["A123456793", "A1234567898"],
+#     A123456789=dict(
+#         name="Flynn Mackie",
+#         title="Senior VP of Engineering",
+#         reports=["A123456793", "A1234567898"],
 #     ),
-#     A123456793 = dict (
-#         name = "Wesley Thomas",
-#         title = "VP of Design",
-#         reports = ["E1"],
+#     A123456793=dict(
+#         name="Wesley Thomas",
+#         title="VP of Design",
+#         reports=["E1"],
 #     ),
-#     A1234567898 = dict (
-#         name = "Nina Chiswick",
-#         title = "VP of Engineering",
-#         reports = ["A123456793", "A1234567898"],
+#     A1234567898=dict(
+#         name="Nina Chiswick",
+#         title="VP of Engineering",
+#         reports=[],
 #     ),
 # )
 
@@ -88,27 +84,24 @@ Flynn Mackie - Senior VP of Engineering
 # def print_hierarchy(employee_id):
 
 #     def helper(employee_id, depth):
-#         if employee_id not in employees: return
+#         if employee_id not in employees:
+#             return
 #         # print first information
 #         employee = employees[employee_id]
-#         initial_indents = ' ' * depth
+#         initial_indents = " " * depth
 #         print(f"{initial_indents}{employee['name']} - {employee['title']}")
 #         # check if there's any reports available
-#         for report in reports:
+#         for report in employee["reports"]:
 #             # report is employee id
-#             helper(report, depth+1)
-        
+#             helper(report, depth + 1)
+
 #     return helper(employee_id, 0)
 
-    
 
-# print_hierarchy(employee_id)
-
+# print_hierarchy("A123456789")
 
 
-
-
-'''
+"""
 Below, see a sample of /var/log/messages.
 
 ---------- begin sample log extract ----------
@@ -141,7 +134,7 @@ Jan 20 05:20,1
 Jan 20 05:22,6
 ---------- end sample output ------------
 
-'''
+"""
 # open the file
 # read file line by line
 # parse each line, and generate key of minute
@@ -149,32 +142,30 @@ Jan 20 05:22,6
 # we should sort -> sort by key (since it's Jan format, we convert those into mm-dd format to make it sortable)
 # then print to csv
 
-minute_count = dict()
-
-def parse(line):
-    splitted = line.split(' ')
-    time = splitted[2]
-    hh, mm, ss = time.split(':')
-    return ' '.join([splitted[0], splitted[1], f'{hh}:{mm}'])
+# minute_count = dict()
 
 
-with open('/var/log/messages', 'r') as f:
-    for line in f.readline():
-        minute = parse(line)
-        if minute not in minute_count:
-            minute_count[minute] = 0
-        minute_count[minute] += 1
-
-    with open('result.csv', 'w') as f:
-        f.write('minute,number_of_messages')
-        for key in minute_count.keys():
-            f.write(f'{key},{minute_count[key]}')
+# def parse(line):
+#     splitted = line.split(" ")
+#     time = splitted[2]
+#     hh, mm, ss = time.split(":")
+#     return " ".join([splitted[0], splitted[1], f"{hh}:{mm}"])
 
 
+# with open("/var/log/messages", "r") as f:
+#     for line in f.readline():
+#         minute = parse(line)
+#         if minute not in minute_count:
+#             minute_count[minute] = 0
+#         minute_count[minute] += 1
+
+#     with open("result.csv", "w") as f:
+#         f.write("minute,number_of_messages")
+#         for key in minute_count.keys():
+#             f.write(f"{key},{minute_count[key]}")
 
 
-
-'''
+"""
 ---------- begin sample log extract ----------
 Jan 20 03:25:08 fakehost logrotate: ALERT exited abnormally with [1]
 Jan 20 03:25:09 fakehost run-parts(/etc/cron.daily)[20447]: finished logrotate
@@ -206,49 +197,46 @@ Jan 20 05:22,6,0,0,0,0,0,0,5,1
 
 Note: It is important that your program work with any arbitrary set of programs, not just the ones in the example output.
 
-'''
+"""
 
-minute_count = dict()
-
-def program_parse(raw_program):
-    res = ''
-    for i in range(len(raw_program)):
-        if i == '(' or i == '[': return res
-        res += raw_program[i]
-    return res
-
-def parse(line):
-    splitted = line.split(' ')
-    time = splitted[2]
-    hh, mm, ss = time.split(':')
-    program_parsed = program_parse(splitted[4])
-    return ' '.join([splitted[0], splitted[1], f'{hh}:{mm}']), program_parsed
-
-def main(columns):
-    with open('/var/log/messages', 'r') as f:
-        for line in f.readline():
-            minute, program_parsed = parse(line)
-            if minute not in minute_count:
-                minute_count[minute] = dict()
-            if program_parsed not in minute_count[minute]:
-                minute_count[minute][program_parsed] = 0
-            minute_count[minute][program_parsed] += 1
-
-        with open('result.csv', 'w') as f:
-            f.write('minute,total_count,'+','.join(columns))
-            for minute_count in minute_count.keys():
-                temp_str = ''
-                temp_str += minute_count
-                programs_count = minute_count[minute_count]
-                temp_arr = []
-                for column in columns:
-                    temp_arr.append(programs_count[column])
-                full_format = temp_str + ',' + ','.join(temp_arr)
-                f.write(full_format)
+# minute_count = dict()
 
 
+# def program_parse(raw_program):
+#     res = ""
+#     for i in range(len(raw_program)):
+#         if i == "(" or i == "[":
+#             return res
+#         res += raw_program[i]
+#     return res
 
 
+# def parse(line):
+#     splitted = line.split(" ")
+#     time = splitted[2]
+#     hh, mm, ss = time.split(":")
+#     program_parsed = program_parse(splitted[4])
+#     return " ".join([splitted[0], splitted[1], f"{hh}:{mm}"]), program_parsed
 
 
+# def main(columns):
+#     with open("/var/log/messages", "r") as f:
+#         for line in f.readline():
+#             minute, program_parsed = parse(line)
+#             if minute not in minute_count:
+#                 minute_count[minute] = dict()
+#             if program_parsed not in minute_count[minute]:
+#                 minute_count[minute][program_parsed] = 0
+#             minute_count[minute][program_parsed] += 1
 
+#         with open("result.csv", "w") as f:
+#             f.write("minute,total_count," + ",".join(columns))
+#             for minute_count in minute_count.keys():
+#                 temp_str = ""
+#                 temp_str += minute_count
+#                 programs_count = minute_count[minute_count]
+#                 temp_arr = []
+#                 for column in columns:
+#                     temp_arr.append(programs_count[column])
+#                 full_format = temp_str + "," + ",".join(temp_arr)
+#                 f.write(full_format)
