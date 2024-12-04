@@ -27,33 +27,40 @@ class Solution:
             total_set.add(original[i])
             total_set.add(changed[i])
 
-        # do form up for the cost
-        for k in total_set:
-            if k not in from_to_map:
-                continue
-            for i in total_set:
-                if i not in from_to_map:
-                    continue
-                if k not in from_to_map[i]:
-                    continue
-                for j in total_set:
-                    if j not in from_to_map[k]:
-                        continue
-                    if j not in from_to_map[i]:
-                        from_to_map[i][j] = sys.maxsize
-                    from_to_map[i][j] = min(
-                        from_to_map[i][j], from_to_map[i][k] + from_to_map[k][j]
-                    )
+        # now generate the costs
+
+        def dfs(u, v, visited):
+            if u == v:
+                return 0
+            if u not in from_to_map:
+                return sys.maxsize
+            if u in visited:
+                return sys.maxsize
+            if u in costs and v in costs[u]:
+                return costs[u][v]
+            res = sys.maxsize
+            visited.add(u)
+            for w in from_to_map[u]:
+                res = min(res, from_to_map[u][w] + dfs(w, v, visited))
+            visited.remove(u)
+            return res
+
+        costs = dict()
+        for u in total_set:
+            if u not in costs:
+                costs[u] = dict()
+            for v in total_set:
+                visited = set()
+                costs[u][v] = dfs(u, v, visited)
+
+        print(costs)
+
         # now calculate
         res = 0
         for i in range(len(source)):
-            if source[i] == target[i]:
-                continue
-            if source[i] not in from_to_map:
+            if source[i] not in costs:
                 return -1
-            if target[i] not in from_to_map[source[i]]:
-                return -1
-            res += from_to_map[source[i]][target[i]]
+            res += costs[source[i]][target[i]]
         return res
 
 
